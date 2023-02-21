@@ -1,0 +1,13 @@
+name: app_environment
+description: Simple solution to handle environment variables using `.json` file.
+version: 1.0.0
+homepage: https://github.com/alexeynobody/flutter-app-environment
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+
+dependencies: null
+
+dev_dependencies:
+  dart_code_metrics: ^5.6.0
+  lints: ^2.0.1
