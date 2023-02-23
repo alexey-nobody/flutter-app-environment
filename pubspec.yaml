@@ -1,4 +1,4 @@
-name: app_environment
+name: flutter_app_environment
 description: Simple solution to handle environment variables using `.json` file.
 version: 1.0.0
 homepage: https://github.com/alexeynobody/flutter-app-environment
