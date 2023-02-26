@@ -34,18 +34,12 @@ jobs:
       - name: 'Dart Code Metrics - Reports code metrics, rules and anti-patterns violations.'
         run: flutter pub run dart_code_metrics:metrics analyze lib
   
-  pana:
-    name: pana
+  package-analysis:
+    name: package points
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2.8.0
-
-      - name: Install Dependencies
-        run: |
-          flutter packages get
-          flutter pub global activate pana
-          sudo apt-get install webp
-      - name: Verify Pub Score
-        run: tool/verify_pub_score.sh
+      - uses: actions/checkout@v2
+      - uses: axel-op/dart-package-analyzer@v3
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
