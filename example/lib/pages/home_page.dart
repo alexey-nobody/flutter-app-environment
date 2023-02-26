@@ -1,4 +1,4 @@
-import 'package:example/models/environment_from_json_config.dart';
+import 'package:example/models/environment_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_environment/environment.dart';
 
@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _counter =
-      Environment<EnvironmentFromJsonConfig>.instance().config.initialCounter;
+      Environment<EnvironmentConfig>.instance().config.initialCounter;
 
   void _incrementCounter() {
     setState(() => _counter++);
