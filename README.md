@@ -1,8 +1,13 @@
 # Flutter App Environment
-
 Simple solution to handle environment variables using `.json` or config in entrypoint file.
 
 ---
+
+## Links
+
+- See [CHANGELOG.md](./CHANGELOG.md) for major/breaking updates
+- [Example](./example/) with explain all features
+
 
 ## Installation
 
@@ -10,10 +15,28 @@ Simple solution to handle environment variables using `.json` or config in entry
 $ flutter pub add --dev flutter_app_environment
 ```
 
-## Links
+## Requirements
 
-- See [CHANGELOG.md](./CHANGELOG.md) for major/breaking updates
-- [Example](./example/) with explain all features
+- Call before initialize Environment
+    ```dart   
+    WidgetsFlutterBinding.ensureInitialized();
+    ```
+
+
+## Requirements for Environment with .json
+
+- Add ```res/config/``` to **pubspec.yaml** assets. This folder contains json files with environment variables
+    ```yaml
+    flutter:
+        assets:
+            - res/config/
+    ```
+
+- For **EnvironmentType.development** use name **development.json** for configuration file
+
+- For **EnvironmentType.test** use name **test.json** for configuration file
+
+- For **EnvironmentType.production** use name **production.json**  for configuration file
 
 
 ## Contribute
