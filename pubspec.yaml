@@ -5,6 +5,7 @@ homepage: https://github.com/alexeynobody/flutter-app-environment
 
 environment:
   sdk: '>=2.19.2 <3.0.0'
+  flutter: '>=3.7.2'
 
 dependencies:
   json_annotation: ^4.8.0
