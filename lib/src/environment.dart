@@ -70,11 +70,35 @@ class Environment<T> {
     return _currentEnvironmentType == EnvironmentType.development;
   }
 
+  /// Initialize the environment from configuration model and store it in entrypoint file.
+  ///
+  /// Params:
+  ///   [environmentType] The environment type that you want to initialize the environment with.
+  ///   [config] Environment variables
+  ///   [debugOptions] An optional parameter that allows you to specify the debug options for the environment.
+  ///
+  /// Throws an [Exception] when [Environment] already initialized.
+  static Future<void> init<T>({
+    required EnvironmentType environmentType,
+    required T config,
+    DebugOptions debugOptions = const DebugOptions(),
+  }) async {
+    if (_instance == null) {
+      _instance = Environment<T>._(
+        environmentType: environmentType,
+        debugOptions: debugOptions,
+        config: config,
+      );
+    } else {
+      throw Exception('Environment already initialized');
+    }
+  }
+
   /// Initialize the environment from file with JSON type in the assets folder.
   ///
   /// Params:
   ///   [environmentType] The environment type that you want to initialize the environment with.
-  ///   [fromJson] A function that takes a Map<String, dynamic> from file and returns an instance of the config class.
+  ///   [fromJson] A function that takes a Map<String, dynamic> from environment file and returns an instance of the config class.
   ///   [debugOptions] An optional parameter that allows you to specify the debug options for the environment.
   ///
   /// Throws an [Exception] when [Environment] already initialized.
