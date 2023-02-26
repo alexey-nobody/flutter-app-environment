@@ -1,5 +1,5 @@
 name: example
-description: Example project with app_environment
+description: Example project with flutter_app_environment
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1

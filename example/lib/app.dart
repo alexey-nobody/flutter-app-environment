@@ -1,4 +1,4 @@
-import 'package:example/models/environment_from_json_config.dart';
+import 'package:example/models/environment_config.dart';
 import 'package:example/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_environment/environment.dart';
@@ -7,12 +7,12 @@ class App extends StatelessWidget {
   const App({super.key});
 
   DebugOptions get _debugOptions =>
-      Environment<EnvironmentFromJsonConfig>.instance().debugOptions;
+      Environment<EnvironmentConfig>.instance().debugOptions;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: Environment<EnvironmentFromJsonConfig>.instance().config.title,
+      title: Environment<EnvironmentConfig>.instance().config.title,
       showPerformanceOverlay: _debugOptions.showPerformanceOverlay,
       debugShowMaterialGrid: _debugOptions.debugShowMaterialGrid,
       checkerboardRasterCacheImages:
@@ -24,7 +24,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: HomePage(
-        title: Environment<EnvironmentFromJsonConfig>.instance().config.title,
+        title: Environment<EnvironmentConfig>.instance().config.title,
       ),
     );
   }
