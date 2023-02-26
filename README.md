@@ -15,15 +15,13 @@ Simple solution to handle environment variables using `.json` or config in entry
 $ flutter pub add --dev flutter_app_environment
 ```
 
-## Requirements
+
+## Requirements for handle environment variables from .json config
 
 - Call before initialize the environment
     ```dart   
     WidgetsFlutterBinding.ensureInitialized();
     ```
-
-
-## Requirements for handle environment variables from .json config
 
 - Add ```res/config/``` to **pubspec.yaml** assets. This folder contains json files with environment variables
     ```yaml
