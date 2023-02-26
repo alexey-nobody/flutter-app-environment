@@ -32,4 +32,4 @@ jobs:
         run: flutter analyze
 
       - name: 'Dart Code Metrics - Reports code metrics, rules and anti-patterns violations.'
-        run: flutter run dart_code_metrics:metrics analyze lib
+        run: flutter pub run dart_code_metrics:metrics analyze lib
