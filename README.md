@@ -17,13 +17,13 @@ $ flutter pub add --dev flutter_app_environment
 
 ## Requirements
 
-- Call before initialize Environment
+- Call before initialize the environment
     ```dart   
     WidgetsFlutterBinding.ensureInitialized();
     ```
 
 
-## Requirements for Environment with .json
+## Requirements for handle environment variables from .json config
 
 - Add ```res/config/``` to **pubspec.yaml** assets. This folder contains json files with environment variables
     ```yaml
