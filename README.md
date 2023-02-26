@@ -1,39 +1,45 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Flutter App Environment
+Simple solution to handle environment variables using `.json` or config in entrypoint file.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+---
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+## Links
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+- See [CHANGELOG.md](./CHANGELOG.md) for major/breaking updates
+- [Example](./example/) with explain all features
 
-## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+## Installation
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```sh
+$ flutter pub add --dev flutter_app_environment
 ```
 
-## Additional information
+## Requirements
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+- Call before initialize Environment
+    ```dart   
+    WidgetsFlutterBinding.ensureInitialized();
+    ```
+
+
+## Requirements for Environment with .json
+
+- Add ```res/config/``` to **pubspec.yaml** assets. This folder contains json files with environment variables
+    ```yaml
+    flutter:
+        assets:
+            - res/config/
+    ```
+
+- For **EnvironmentType.development** use name **development.json** for configuration file
+
+- For **EnvironmentType.test** use name **test.json** for configuration file
+
+- For **EnvironmentType.production** use name **production.json**  for configuration file
+
+
+## Contribute
+
+Please feel free to fork, improve, make pull requests or fill issues.
+I'll be glad to fix bugs you encountered or improve the extension.

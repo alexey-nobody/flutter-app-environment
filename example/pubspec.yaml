@@ -1,0 +1,31 @@
+name: example
+description: Example project with app_environment
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+
+dependencies:
+  flutter_app_environment:
+    path: ../
+  cupertino_icons: ^1.0.5
+  flutter:
+    sdk: flutter
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.8.0
+
+dev_dependencies:
+  build_runner: ^2.3.3
+  dart_code_metrics: ^5.6.0
+  flutter_lints: ^2.0.1
+  flutter_test:
+    sdk: flutter
+  freezed: ^2.2.0
+  json_serializable: ^6.6.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - res/config/
