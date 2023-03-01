@@ -1,6 +1,6 @@
 import 'package:example/models/environment_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_environment/environment.dart';
+import 'package:flutter_app_environment/flutter_app_environment.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({required this.title, super.key});
