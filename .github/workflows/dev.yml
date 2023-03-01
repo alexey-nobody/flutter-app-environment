@@ -17,7 +17,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
-      - uses: subosito/flutter-action@v2.5.0
+      - uses: subosito/flutter-action@v2.8.0
         with:
           channel: 'stable'
           cache: true
@@ -33,3 +33,13 @@ jobs:
 
       - name: 'Dart Code Metrics - Reports code metrics, rules and anti-patterns violations.'
         run: flutter pub run dart_code_metrics:metrics analyze lib
+  
+  package-analysis:
+    name: package points
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: axel-op/dart-package-analyzer@v3
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}

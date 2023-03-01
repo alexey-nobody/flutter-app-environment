@@ -36,6 +36,45 @@ $ flutter pub add --dev flutter_app_environment
 
 - For **EnvironmentType.production** use name **production.json**  for configuration file
 
+## Usage for handle environment variables from .json config
+
+### Easy **three** steps
+
+1. **Create config**
+    ```dart
+    @JsonSerializable(createToJson: false)
+    class EnvironmentConfig {
+        const EnvironmentConfig({
+            required this.title,
+            required this.initialCounter,
+        });
+
+        factory EnvironmentConfig.fromJson(Map<String, dynamic> json) =>
+            _$EnvironmentConfigFromJson(json);
+
+        final String title;
+
+        final int initialCounter;
+    }
+    ```
+
+2. **Initialize**
+    ```dart
+    WidgetsFlutterBinding.ensureInitialized();
+
+    await Environment.initFromJson<EnvironmentConfig>(
+        environmentType: EnvironmentType.development,
+        fromJson: EnvironmentConfig.fromJson,
+    );
+    ```
+
+3. **Use it**
+    ```dart
+    home: HomePage(
+        title: Environment<EnvironmentConfig>.instance().config.title,
+    ),
+    ```
+
 
 ## Contribute
 
