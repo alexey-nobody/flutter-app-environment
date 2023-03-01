@@ -78,11 +78,11 @@ class Environment<T> {
   ///   [debugOptions] An optional parameter that allows you to specify the debug options for the environment.
   ///
   /// Throws an [Exception] when [Environment] already initialized.
-  static Future<void> init<T>({
+  static void init<T>({
     required EnvironmentType environmentType,
     required T config,
     DebugOptions debugOptions = const DebugOptions(),
-  }) async {
+  }) {
     if (_instance == null) {
       _instance = Environment<T>._(
         environmentType: environmentType,

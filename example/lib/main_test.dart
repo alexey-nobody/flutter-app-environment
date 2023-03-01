@@ -5,7 +5,7 @@ import 'package:flutter_app_environment/flutter_app_environment.dart';
 
 Future<void> main() async {
   // Initializing the environment from the entrypoint file.
-  await Environment.init<EnvironmentConfig>(
+  Environment.init<EnvironmentConfig>(
     environmentType: EnvironmentType.test,
     config: const EnvironmentConfig(
       title: 'Test evironment title',
