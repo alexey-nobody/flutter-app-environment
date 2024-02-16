@@ -76,6 +76,49 @@ $ flutter pub add --dev flutter_app_environment
     ```
 
 
+## Usage for handle environment variables from entrypoint file
+
+### Easy **three** steps
+
+1. **Create config**
+    ```dart
+    @JsonSerializable(createToJson: false)
+    class EnvironmentConfig {
+        const EnvironmentConfig({
+            required this.title,
+            required this.initialCounter,
+        });
+
+        factory EnvironmentConfig.fromJson(Map<String, dynamic> json) =>
+            _$EnvironmentConfigFromJson(json);
+
+        final String title;
+
+        final int initialCounter;
+    }
+    ```
+
+2. **Initialize**
+    ```dart
+    WidgetsFlutterBinding.ensureInitialized();
+
+    Environment.init<EnvironmentConfig>(
+        environmentType: EnvironmentType.test,
+        config: const EnvironmentConfig(
+        title: 'Test evironment title',
+        initialCounter: 0,
+        ),
+    );
+    ```
+
+3. **Use it**
+    ```dart
+    home: HomePage(
+        title: Environment<EnvironmentConfig>.instance().config.title,
+    ),
+    ```
+
+
 ## Contribute
 
 Please feel free to fork, improve, make pull requests or fill issues.
