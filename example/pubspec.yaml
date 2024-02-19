@@ -5,7 +5,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: '>=2.19.2 <4.0.0'
 
 dependencies:
   flutter_app_environment:
@@ -19,7 +19,7 @@ dependencies:
 dev_dependencies:
   build_runner: ^2.3.3
   dart_code_metrics: ^5.6.0
-  flutter_lints: ^2.0.1
+  flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
   freezed: ^2.2.0

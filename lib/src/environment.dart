@@ -7,7 +7,7 @@ import 'package:flutter_app_environment/src/models/environment_type.dart';
 class Environment<T> {
   const Environment._({
     required T config,
-    required EnvironmentType environmentType,
+    required Enum environmentType,
     DebugOptions debugOptions = const DebugOptions(),
   })  : _config = config,
         _currentEnvironmentType = environmentType,
@@ -22,14 +22,14 @@ class Environment<T> {
 
   static Environment? _instance;
 
-  final EnvironmentType _currentEnvironmentType;
+  final Enum _currentEnvironmentType;
   final T _config;
   final DebugOptions _debugOptions;
 
   /// A getter that returns the current environment type.
   ///
   /// Throws an [Exception] when Environment.init not called before and Environment not initialized.
-  EnvironmentType get currentEnvironmentType {
+  Enum get currentEnvironmentType {
     if (_instance == null) {
       throw Exception('Need call init method first!');
     }
@@ -94,6 +94,30 @@ class Environment<T> {
     }
   }
 
+  /// Initialize the environment from configuration model with custom EnvironmentType and store it in entrypoint file.
+  ///
+  /// Params:
+  ///   [environmentType] The environment type that you want to initialize the environment with.
+  ///   [config] Environment variables
+  ///   [debugOptions] An optional parameter that allows you to specify the debug options for the environment.
+  ///
+  /// Throws an [Exception] when [Environment] already initialized.
+  static void initWithCustomType<T, D extends Enum>({
+    required D environmentType,
+    required T config,
+    DebugOptions debugOptions = const DebugOptions(),
+  }) {
+    if (_instance == null) {
+      _instance = Environment<T>._(
+        environmentType: environmentType,
+        debugOptions: debugOptions,
+        config: config,
+      );
+    } else {
+      throw Exception('Environment already initialized');
+    }
+  }
+
   /// Initialize the environment from file with JSON type in the assets folder.
   ///
   /// Params:
@@ -104,6 +128,36 @@ class Environment<T> {
   /// Throws an [Exception] when [Environment] already initialized.
   static Future<void> initFromJson<T>({
     required EnvironmentType environmentType,
+    required T Function(Map<String, dynamic> data) fromJson,
+    DebugOptions debugOptions = const DebugOptions(),
+  }) async {
+    if (_instance == null) {
+      final environmentFileName = '${environmentType.toShortString()}.json';
+      final environmentPath = 'res/config/$environmentFileName';
+
+      final content = await rootBundle.loadString(environmentPath);
+      final jsonObject = jsonDecode(content) as Map<String, dynamic>;
+
+      _instance = Environment<T>._(
+        environmentType: environmentType,
+        debugOptions: debugOptions,
+        config: fromJson(jsonObject),
+      );
+    } else {
+      throw Exception('Environment already initialized');
+    }
+  }
+
+  /// Initialize the custom environment from file with JSON type in the assets folder.
+  ///
+  /// Params:
+  ///   [environmentType] The environment type that you want to initialize the environment with.
+  ///   [fromJson] A function that takes a Map<String, dynamic> from environment file and returns an instance of the config class.
+  ///   [debugOptions] An optional parameter that allows you to specify the debug options for the environment.
+  ///
+  /// Throws an [Exception] when [Environment] already initialized.
+  static Future<void> initFromJsonWithCustomType<T, D extends Enum>({
+    required D environmentType,
     required T Function(Map<String, dynamic> data) fromJson,
     DebugOptions debugOptions = const DebugOptions(),
   }) async {

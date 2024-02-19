@@ -1,8 +1,6 @@
 include: package:lints/recommended.yaml
 
 analyzer:
-  plugins:
-    - dart_code_metrics
   exclude:
     - '**.g.dart'
     - '**.mocks.dart'
@@ -14,32 +12,6 @@ analyzer:
     invalid_annotation_target: ignore
 
 
-dart_code_metrics:
-  metrics:
-    - cyclomatic-complexity: 20
-    - maximum-nesting-level: 5
-  metrics-exclude:
-    - 'test/**'
-    - 'lib/common/routes_factory.dart'
-  rules:
-    - avoid-unnecessary-setstate:
-        severity: error
-    - prefer-extracting-callbacks:
-        severity: error
-    - prefer-single-widget-per-file:
-        ignore-private-widgets: true
-    - always-remove-listener:
-        severity: error
-    - no-boolean-literal-compare:
-        severity: error
-    - prefer-trailing-comma:
-        severity: error
-    - no-equal-then-else:
-        severity: error
-    - prefer-match-file-name:
-        severity: error
-        exclude:
-          - 'test/**'
 linter:
   rules:
     # Const rules.
@@ -52,7 +24,6 @@ linter:
     # Style rules.
     always_declare_return_types: true
     always_put_required_named_parameters_first: true
-    always_require_non_null_named_parameters: true
     annotate_overrides: true
     avoid_bool_literals_in_conditional_expressions: true
     avoid_catches_without_on_clauses: true
@@ -69,7 +40,6 @@ linter:
     avoid_redundant_argument_values: true
     avoid_renaming_method_parameters: true
     avoid_return_types_on_setters: true
-    avoid_returning_null: true
     avoid_returning_null_for_void: true
     avoid_returning_this: true
     avoid_setters_without_getters: true
@@ -108,7 +78,6 @@ linter:
     prefer_conditional_assignment: true
     prefer_constructors_over_static_methods: true
     prefer_contains: true
-    prefer_equal_for_default_values: true
     prefer_final_fields: true
     prefer_final_in_for_each: true
     prefer_final_locals: true
@@ -168,7 +137,6 @@ linter:
     avoid_empty_else: true
     avoid_print: true
     avoid_relative_lib_imports: true
-    avoid_returning_null_for_future: true
     avoid_slow_async_io: true
     avoid_types_as_parameter_names: true
     avoid_web_libraries_in_flutter: true
@@ -177,8 +145,6 @@ linter:
     control_flow_in_finally: true
     empty_statements: true
     hash_and_equals: true
-    iterable_contains_unrelated_type: true
-    list_remove_unrelated_type: true
     literal_only_boolean_expressions: true
     no_adjacent_strings_in_list: true
     no_duplicate_case_values: true

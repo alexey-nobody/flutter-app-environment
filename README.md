@@ -118,6 +118,32 @@ $ flutter pub add --dev flutter_app_environment
     ),
     ```
 
+## Usage for handle environment with custom environment type
+
+1. **Create environment type**
+    ```dart
+        enum CustomEnvironmentType { dev, stage, prod }
+    ```
+
+2. **Use method initFromJsonWithCustomType for json config**
+    ```dart
+        await Environment.initFromJsonWithCustomType<EnvironmentConfig,
+            CustomEnvironmentType>(
+            environmentType: CustomEnvironmentType.stage,
+            fromJson: EnvironmentConfig.fromJson,
+        );
+    ```
+
+3. **Or use method initWithCustomType for entrypoint config**
+    ```dart
+        Environment.initWithCustomType<EnvironmentConfig, CustomEnvironmentType>(
+            environmentType: CustomEnvironmentType.dev,
+            config: const EnvironmentConfig(
+                title: 'Test evironment title',
+                initialCounter: 0,
+            ),
+        );
+    ```
 
 ## Contribute
 
