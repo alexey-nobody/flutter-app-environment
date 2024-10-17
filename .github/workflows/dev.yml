@@ -25,6 +25,9 @@ jobs:
       - name: 'Get dependencies'
         run: flutter pub get
 
+      - name: 'Code generation for example folder'
+        run: cd example && dart pub run build_runner build
+
       - name: 'Check code style'
         run: dart format --set-exit-if-changed .
 

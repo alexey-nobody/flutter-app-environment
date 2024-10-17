@@ -17,7 +17,8 @@ class Environment<T> {
     if (_instance == null) {
       throw Exception('Need call init method first!');
     }
-    return _instance as Environment<T>;
+
+    return _instance! as Environment<T>;
   }
 
   static Environment? _instance;

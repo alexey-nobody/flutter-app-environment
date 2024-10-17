@@ -1,5 +1,15 @@
-/// This class contains that control the debug options of the app for
-/// use it in App main class and configure MaterialApp
+import 'package:flutter_app_environment/flutter_app_environment.dart';
+
+/// Class with options to use in Flutter's `debug` mode.
+///
+/// You can use this class to specify which debug options you want to use in
+/// Flutter's `debug` mode. You can use it when you're initializing the
+/// environment with [Environment.init] or [Environment.initFromJson].
+///
+/// See also:
+///
+/// * [Environment.init]
+/// * [Environment.initFromJson]
 class DebugOptions {
   const DebugOptions({
     this.showPerformanceOverlay = false,
