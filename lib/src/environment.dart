@@ -129,7 +129,7 @@ class Environment<T> {
   ///
   /// Params:
   ///   [environmentType] The environment type that you want to initialize the environment with.
-  ///   [fromJson] A function that takes a Map<String, dynamic> from environment file and returns an instance of the config class.
+  ///   [fromJson] A function that takes a Map\<String, dynamic\> from environment file and returns an instance of the config class.
   ///   [debugOptions] An optional parameter that allows you to specify the debug options for the environment.
   ///
   /// Throws an [Exception] when [Environment] already initialized.
@@ -161,7 +161,7 @@ class Environment<T> {
   ///
   /// Params:
   ///   [environmentType] The environment type that you want to initialize the environment with.
-  ///   [fromJson] A function that takes a Map<String, dynamic> from environment file and returns an instance of the config class.
+  ///   [fromJson] A function that takes a Map\<String, dynamic\> from environment file and returns an instance of the config class.
   ///   [debugOptions] An optional parameter that allows you to specify the debug options for the environment.
   ///
   /// Throws an [Exception] when [Environment] already initialized.
