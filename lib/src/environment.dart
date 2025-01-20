@@ -3,6 +3,7 @@ import 'dart:convert' show jsonDecode;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_app_environment/src/models/debug_options.dart';
 import 'package:flutter_app_environment/src/models/environment_type.dart';
+import 'package:flutter_app_environment/src/models/exceptions/environment_already_initialized_exception.dart';
 
 class Environment<T> {
   const Environment._({
@@ -91,7 +92,9 @@ class Environment<T> {
         config: config,
       );
     } else {
-      throw Exception('Environment already initialized');
+      throw EnvironmentAlreadyInitializedException(
+        'Environment already initialized with ${_instance!.currentEnvironmentType} environment type',
+      );
     }
   }
 
@@ -115,7 +118,9 @@ class Environment<T> {
         config: config,
       );
     } else {
-      throw Exception('Environment already initialized');
+      throw EnvironmentAlreadyInitializedException(
+        'Environment already initialized with ${_instance!.currentEnvironmentType} environment type',
+      );
     }
   }
 
@@ -145,7 +150,9 @@ class Environment<T> {
         config: fromJson(jsonObject),
       );
     } else {
-      throw Exception('Environment already initialized');
+      throw EnvironmentAlreadyInitializedException(
+        'Environment already initialized with ${_instance!.currentEnvironmentType} environment type',
+      );
     }
   }
 
@@ -175,7 +182,9 @@ class Environment<T> {
         config: fromJson(jsonObject),
       );
     } else {
-      throw Exception('Environment already initialized');
+      throw EnvironmentAlreadyInitializedException(
+        'Environment already initialized with ${_instance!.currentEnvironmentType} environment type',
+      );
     }
   }
 }
