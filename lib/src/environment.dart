@@ -1,6 +1,5 @@
 import 'dart:convert' show jsonDecode;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_app_environment/src/models/debug_options.dart';
 import 'package:flutter_app_environment/src/models/environment_type.dart';
