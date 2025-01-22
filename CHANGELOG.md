@@ -1,3 +1,10 @@
+## 1.0.4
+ - added new exceptions to improve error handling:
+   - EnvironmentFailedToLoadException
+   - EnvironmentAlreadyInitializedException
+   - EnvironmentNotInitializedException
+ - improved error handling during environment initialization
+
 ## 1.0.3
  - refactor documentation and update linting rules for improved code consistency
 
