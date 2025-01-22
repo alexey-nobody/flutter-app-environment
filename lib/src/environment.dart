@@ -1,9 +1,11 @@
 import 'dart:convert' show jsonDecode;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_app_environment/src/models/debug_options.dart';
 import 'package:flutter_app_environment/src/models/environment_type.dart';
 import 'package:flutter_app_environment/src/models/exceptions/environment_already_initialized_exception.dart';
+import 'package:flutter_app_environment/src/models/exceptions/environment_failed_to_load_exception.dart';
 import 'package:flutter_app_environment/src/models/exceptions/environment_not_initialized_exception.dart';
 
 class Environment<T> {
@@ -142,14 +144,21 @@ class Environment<T> {
       final environmentFileName = '${environmentType.toShortString()}.json';
       final environmentPath = 'res/config/$environmentFileName';
 
-      final content = await rootBundle.loadString(environmentPath);
-      final jsonObject = jsonDecode(content) as Map<String, dynamic>;
+      try {
+        final content = await rootBundle.loadString(environmentPath);
+        final jsonObject = jsonDecode(content) as Map<String, dynamic>;
 
-      _instance = Environment<T>._(
-        environmentType: environmentType,
-        debugOptions: debugOptions,
-        config: fromJson(jsonObject),
-      );
+        _instance = Environment<T>._(
+          environmentType: environmentType,
+          debugOptions: debugOptions,
+          config: fromJson(jsonObject),
+        );
+        // ignore: avoid_catching_errors
+      } on Error {
+        throw EnvironmentFailedToLoadException(
+          'Failed to load environment file: $environmentPath',
+        );
+      }
     } else {
       throw EnvironmentAlreadyInitializedException(
         'Environment already initialized with ${_instance!.currentEnvironmentType} environment type',
