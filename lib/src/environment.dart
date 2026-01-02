@@ -74,55 +74,17 @@ class Environment<T> {
     return _currentEnvironmentType == EnvironmentType.development;
   }
 
-  /// Initialize the environment from file with JSON type in the assets folder.
+  /// Initialize the environment from a JSON file in the assets folder.
   ///
   /// Params:
-  ///   [environmentType] The environment type that you want to initialize the environment with.
-  ///   [fromJson] A function that takes a Map\<String, dynamic\> from environment file and returns an instance of the config class.
-  ///   [debugOptions] An optional parameter that allows you to specify the debug options for the environment.
+  ///   [environmentType] The environment type (standard [EnvironmentType] or a custom Enum).
+  ///   [fromJson] A function to parse the JSON Map into your configuration model [T].
+  ///   [debugOptions] Optional debug settings for the environment.
   ///
-  /// Throws an [Exception] when [Environment] already initialized.
-  static Future<void> initFromJson<T>({
-    required EnvironmentType environmentType,
-    required T Function(Map<String, dynamic> data) fromJson,
-    DebugOptions debugOptions = const DebugOptions(),
-  }) async {
-    if (_instance == null) {
-      final environmentFileName = '${environmentType.name}.json';
-      final environmentPath = 'res/config/$environmentFileName';
-
-      try {
-        final content = await rootBundle.loadString(environmentPath);
-        final jsonObject = jsonDecode(content) as Map<String, dynamic>;
-
-        _instance = Environment<T>._(
-          environmentType: environmentType,
-          debugOptions: debugOptions,
-          config: fromJson(jsonObject),
-        );
-        // ignore: avoid_catching_errors
-      } on Error {
-        throw EnvironmentFailedToLoadException(
-          'Failed to load environment file: $environmentPath',
-        );
-      }
-    } else {
-      throw EnvironmentAlreadyInitializedException(
-        'Environment already initialized with ${_instance!.currentEnvironmentType} environment type',
-      );
-    }
-  }
-
-  /// Initialize the custom environment from file with JSON type in the assets folder.
-  ///
-  /// Params:
-  ///   [environmentType] The environment type that you want to initialize the environment with.
-  ///   [fromJson] A function that takes a Map\<String, dynamic\> from environment file and returns an instance of the config class.
-  ///   [debugOptions] An optional parameter that allows you to specify the debug options for the environment.
-  ///
-  /// Throws an [Exception] when [Environment] already initialized.
-  static Future<void> initFromJsonWithCustomType<T, D extends Enum>({
-    required D environmentType,
+  /// Throws an [EnvironmentAlreadyInitializedException] if initialized more than once.
+  /// Throws an [EnvironmentFailedToLoadException] if the file is missing or invalid.
+  static Future<void> init<T, E extends Enum>({
+    required E environmentType,
     required T Function(Map<String, dynamic> data) fromJson,
     DebugOptions debugOptions = const DebugOptions(),
   }) async {
