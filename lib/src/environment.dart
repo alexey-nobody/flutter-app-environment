@@ -74,58 +74,6 @@ class Environment<T> {
     return _currentEnvironmentType == EnvironmentType.development;
   }
 
-  /// Initialize the environment from configuration model and store it in entrypoint file.
-  ///
-  /// Params:
-  ///   [environmentType] The environment type that you want to initialize the environment with.
-  ///   [config] Environment variables
-  ///   [debugOptions] An optional parameter that allows you to specify the debug options for the environment.
-  ///
-  /// Throws an [Exception] when [Environment] already initialized.
-  static void init<T>({
-    required EnvironmentType environmentType,
-    required T config,
-    DebugOptions debugOptions = const DebugOptions(),
-  }) {
-    if (_instance == null) {
-      _instance = Environment<T>._(
-        environmentType: environmentType,
-        debugOptions: debugOptions,
-        config: config,
-      );
-    } else {
-      throw EnvironmentAlreadyInitializedException(
-        'Environment already initialized with ${_instance!.currentEnvironmentType} environment type',
-      );
-    }
-  }
-
-  /// Initialize the environment from configuration model with custom EnvironmentType and store it in entrypoint file.
-  ///
-  /// Params:
-  ///   [environmentType] The environment type that you want to initialize the environment with.
-  ///   [config] Environment variables
-  ///   [debugOptions] An optional parameter that allows you to specify the debug options for the environment.
-  ///
-  /// Throws an [Exception] when [Environment] already initialized.
-  static void initWithCustomType<T, D extends Enum>({
-    required D environmentType,
-    required T config,
-    DebugOptions debugOptions = const DebugOptions(),
-  }) {
-    if (_instance == null) {
-      _instance = Environment<T>._(
-        environmentType: environmentType,
-        debugOptions: debugOptions,
-        config: config,
-      );
-    } else {
-      throw EnvironmentAlreadyInitializedException(
-        'Environment already initialized with ${_instance!.currentEnvironmentType} environment type',
-      );
-    }
-  }
-
   /// Initialize the environment from file with JSON type in the assets folder.
   ///
   /// Params:
