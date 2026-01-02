@@ -140,7 +140,7 @@ class Environment<T> {
     DebugOptions debugOptions = const DebugOptions(),
   }) async {
     if (_instance == null) {
-      final environmentFileName = '${environmentType.toShortString()}.json';
+      final environmentFileName = '${environmentType.name}.json';
       final environmentPath = 'res/config/$environmentFileName';
 
       try {
@@ -179,17 +179,24 @@ class Environment<T> {
     DebugOptions debugOptions = const DebugOptions(),
   }) async {
     if (_instance == null) {
-      final environmentFileName = '${environmentType.toShortString()}.json';
+      final environmentFileName = '${environmentType.name}.json';
       final environmentPath = 'res/config/$environmentFileName';
 
-      final content = await rootBundle.loadString(environmentPath);
-      final jsonObject = jsonDecode(content) as Map<String, dynamic>;
+      try {
+        final content = await rootBundle.loadString(environmentPath);
+        final jsonObject = jsonDecode(content) as Map<String, dynamic>;
 
-      _instance = Environment<T>._(
-        environmentType: environmentType,
-        debugOptions: debugOptions,
-        config: fromJson(jsonObject),
-      );
+        _instance = Environment<T>._(
+          environmentType: environmentType,
+          debugOptions: debugOptions,
+          config: fromJson(jsonObject),
+        );
+        // ignore: avoid_catching_errors
+      } on Error {
+        throw EnvironmentFailedToLoadException(
+          'Failed to load environment file: $environmentPath',
+        );
+      }
     } else {
       throw EnvironmentAlreadyInitializedException(
         'Environment already initialized with ${_instance!.currentEnvironmentType} environment type',
