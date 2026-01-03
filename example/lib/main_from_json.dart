@@ -9,7 +9,7 @@ Future<void> main() async {
   // Initializing the environment from the file.
   await Environment.init<EnvironmentConfig, EnvironmentType>(
     environmentType: EnvironmentType.development,
-    fromJson: EnvironmentConfig.fromJson,
+    parser: EnvironmentConfig.fromJson,
   );
 
   runApp(const App());
