@@ -124,4 +124,11 @@ class Environment<T> {
       );
     }
   }
+
+  /// Resets the environment instance.
+  ///
+  /// This should only be used for testing purposes.
+  static void reset() {
+    _instance = null;
+  }
 }
