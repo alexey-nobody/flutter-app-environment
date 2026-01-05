@@ -129,7 +129,6 @@ IS_DEBUG=true
 # This is a comment
 API_KEY="your_secret_key"
 ```
-    ```
 
 ---
 
