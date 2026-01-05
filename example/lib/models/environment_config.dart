@@ -11,10 +11,7 @@ part 'environment_config.g.dart';
 /// * [freezed](https://pub.dev/packages/freezed)
 @JsonSerializable(createToJson: false)
 class EnvironmentConfig {
-  const EnvironmentConfig({
-    required this.title,
-    required this.initialCounter,
-  });
+  const EnvironmentConfig({required this.title, required this.initialCounter});
 
   // this factory constructor need only when you use JSON file for handle environment variables
   factory EnvironmentConfig.fromJson(Map<String, dynamic> json) =>
