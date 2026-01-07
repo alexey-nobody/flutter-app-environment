@@ -1,5 +1,5 @@
 # Flutter App Environment
-A simple solution to manage environment variables using `.json` or `.env` files, or configuration directly in the entrypoint file.
+A simple solution to manage environment variables using `.json` or `.env` files.
 
 ---
 
