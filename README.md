@@ -98,6 +98,7 @@ flutter:
       environmentType: CustomEnvironmentType.stage,
       parser: EnvironmentConfig.fromJson,
     );
+    ```
 
 ---
 
