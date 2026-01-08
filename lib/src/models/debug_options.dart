@@ -4,12 +4,11 @@ import 'package:flutter_app_environment/flutter_app_environment.dart';
 ///
 /// You can use this class to specify which debug options you want to use in
 /// Flutter's `debug` mode. You can use it when you're initializing the
-/// environment with [Environment.init] or [Environment.initFromJson].
+/// environment with [Environment.init].
 ///
 /// See also:
 ///
 /// * [Environment.init]
-/// * [Environment.initFromJson]
 class DebugOptions {
   const DebugOptions({
     this.showPerformanceOverlay = false,

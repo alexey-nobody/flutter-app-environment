@@ -1,5 +1,5 @@
 # Flutter App Environment
-A simple solution to manage environment variables using `.json` files or configuration in the entrypoint file.
+A simple solution to manage environment variables using `.json` or `.env` files.
 
 ---
 
@@ -15,7 +15,7 @@ A simple solution to manage environment variables using `.json` files or configu
 To install the package, run the following command:
 
 ```sh
-flutter pub add --dev flutter_app_environment
+flutter pub add flutter_app_environment
 ```
 
 ---
@@ -38,11 +38,11 @@ flutter:
     - res/config/
 ```
 
-- For **EnvironmentType.development**, use `development.json` as the configuration file.
-- For **EnvironmentType.test**, use `test.json` as the configuration file.
-- For **EnvironmentType.production**, use `production.json` as the configuration file.
+- For **EnvironmentType.development**, use `development.json` or `development.env` as the configuration file.
+- For **EnvironmentType.test**, use `test.json` or `test.env` as the configuration file.
+- For **EnvironmentType.production**, use `production.json` or `production.env` as the configuration file.
 
-### Usage: Three Simple Steps
+### Usage with `.json`: Three Simple Steps
 
 1. **Create the Config**
 
@@ -67,40 +67,9 @@ flutter:
     ```dart
     WidgetsFlutterBinding.ensureInitialized();
 
-    await Environment.initFromJson<EnvironmentConfig>(
+    await Environment.init<EnvironmentConfig, EnvironmentType>(
       environmentType: EnvironmentType.development,
-      fromJson: EnvironmentConfig.fromJson,
-    );
-    ```
-
-3. **Use the Config**
-
-    ```dart
-    home: HomePage(
-      title: Environment<EnvironmentConfig>.instance().config.title,
-    ),
-    ```
-
----
-
-## Managing Environment Variables from the Entrypoint File
-
-### Usage: Three Simple Steps
-
-1. **Create the Config**
-    (same as the previous example)
-
-2. **Initialize the Environment**
-
-    ```dart
-    WidgetsFlutterBinding.ensureInitialized();
-
-    Environment.init<EnvironmentConfig>(
-      environmentType: EnvironmentType.test,
-      config: const EnvironmentConfig(
-        title: 'Test environment title',
-        initialCounter: 0,
-      ),
+      parser: EnvironmentConfig.fromJson,
     );
     ```
 
@@ -122,26 +91,45 @@ flutter:
     enum CustomEnvironmentType { dev, stage, prod }
     ```
 
-2. **Initialize with a JSON Config**
+2. **Initialize the Environment**
 
     ```dart
-    await Environment.initFromJsonWithCustomType<EnvironmentConfig, CustomEnvironmentType>(
+    await Environment.init<EnvironmentConfig, CustomEnvironmentType>(
       environmentType: CustomEnvironmentType.stage,
-      fromJson: EnvironmentConfig.fromJson,
+      parser: EnvironmentConfig.fromJson,
     );
     ```
 
-3. **Initialize from the Entrypoint File**
+---
 
-    ```dart
-    Environment.initWithCustomType<EnvironmentConfig, CustomEnvironmentType>(
-      environmentType: CustomEnvironmentType.dev,
-      config: const EnvironmentConfig(
-        title: 'Custom environment title',
-        initialCounter: 0,
-      ),
-    );
-    ```
+## Managing Environment Variables from a `.env` File
+
+Initialize the environment by specifying `EnvironmentSourceType.env`:
+
+```dart
+await Environment.init<EnvironmentConfig, EnvironmentType>(
+  environmentType: EnvironmentType.development,
+  source: EnvironmentSourceType.env,
+  parser: EnvironmentConfig.fromJson,
+);
+```
+
+### `.env` File Format
+
+The parser supports:
+- Basic key-value pairs.
+- Comments (lines starting with `#`).
+- Trailing comments.
+- Quoted values (single and double quotes).
+- Automatic type inference for `int`, `double`, and `bool`.
+
+```env
+TITLE=Environment Development
+INITIAL_COUNTER=10
+IS_DEBUG=true
+# This is a comment
+API_KEY="your_secret_key"
+```
 
 ---
 
@@ -156,7 +144,8 @@ your_project/
 │   └── config/
 │       ├── development.json
 │       ├── test.json
-│       └── production.json
+│       ├── production.json
+│       └── development.env
 │
 ├── lib/
 │   ├── main.dart
@@ -172,7 +161,7 @@ In this example, JSON configuration files are stored in the `res/config/` folder
 ### Notes
 
 - Make sure to call `WidgetsFlutterBinding.ensureInitialized()` before initializing the environment.
-- The `EnvironmentConfig` class should match the structure of your `.json` files or entrypoint configurations.
+- The `EnvironmentConfig` class should match the structure of your `.json` or `.env` files.
 - You can switch between different environment types depending on your build (development, test, production) or create custom environment types.
 
 ---

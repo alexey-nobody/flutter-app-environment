@@ -1,4 +1,4 @@
-name: dev
+name: Code Quality Workflow
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: code quality
+    name: Test
     runs-on: ubuntu-latest
 
     steps:
@@ -33,13 +33,16 @@ jobs:
 
       - name: 'Analyze'
         run: flutter analyze
+
+      - name: 'Tests'
+        run: flutter test
   
   package-analysis:
-    name: package points
+    name: Package points
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: axel-op/dart-package-analyzer@v3
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}

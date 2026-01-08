@@ -20,9 +20,7 @@ class App extends StatelessWidget {
       checkerboardOffscreenLayers: _debugOptions.checkerboardOffscreenLayers,
       showSemanticsDebugger: _debugOptions.showSemanticsDebugger,
       debugShowCheckedModeBanner: _debugOptions.debugShowCheckedModeBanner,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(
         title: Environment<EnvironmentConfig>.instance().config.title,
       ),

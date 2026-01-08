@@ -6,11 +6,10 @@ import 'package:flutter_app_environment/flutter_app_environment.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initializing the environment from the json file.
-  // Configuration for environment stored in res/config/development.json
-  await Environment.initFromJson<EnvironmentConfig>(
+  // Initializing the environment from the file.
+  await Environment.init<EnvironmentConfig, EnvironmentType>(
     environmentType: EnvironmentType.development,
-    fromJson: EnvironmentConfig.fromJson,
+    parser: EnvironmentConfig.fromJson,
   );
 
   runApp(const App());

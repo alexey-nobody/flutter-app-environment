@@ -1,7 +1,6 @@
 name: flutter_app_environment
-description: Simple solution to handle environment variables using `.json` or
-  config in entrypoint file.
-version: 1.0.4
+description: Simple solution to manage environment variables using `.json` or `.env` files.
+version: 2.0.0
 homepage: https://github.com/alexeynobody/flutter-app-environment
 
 environment:
@@ -11,7 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  json_annotation: ^4.8.0
 
 dev_dependencies:
   flutter_lints: ^5.0.0
+  flutter_test:
+    sdk: flutter

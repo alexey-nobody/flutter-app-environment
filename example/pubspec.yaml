@@ -5,14 +5,14 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.2 <4.0.0'
+  sdk: '>=3.8.0 <4.0.0'
 
 dependencies:
-  flutter_app_environment:
-    path: ../
   cupertino_icons: ^1.0.5
   flutter:
     sdk: flutter
+  flutter_app_environment:
+    path: ../
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
 
